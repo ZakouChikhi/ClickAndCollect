@@ -1,0 +1,10 @@
+POST http://localhost:8080/items/
+Content-Type: application/json
+
+{
+  "itemName": "cookies",
+  "itemType": "desert",
+  "price": 2.0,
+  "quantity": 22,
+  "blob": ""
+}
