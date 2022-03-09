@@ -9,9 +9,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
 
-
+    @Mapping(target = "id", source = "id")
     ItemDto map(Item item);
 
-
+    @Mapping(target = "id", source = "id")
     Item map(ItemDto itemDto);
 }

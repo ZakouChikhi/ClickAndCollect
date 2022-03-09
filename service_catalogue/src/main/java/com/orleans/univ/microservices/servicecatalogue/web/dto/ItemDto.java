@@ -1,33 +1,70 @@
 package com.orleans.univ.microservices.servicecatalogue.web.dto;
 
 
-import com.sun.istack.NotNull;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
 
-@Getter
-@Setter
+
+
+
 public class ItemDto {
 
-    private long id;
-    @NotNull
-    @NotEmpty
-    private String itemName ;
-    @NotNull
-    @NotEmpty
-    private String itemType;
-    @NotNull
-    @NotEmpty
-    private double price;
-    @NotNull
-    @NotEmpty
-    private double quantity;
 
-    @NotNull
-    @EqualsAndHashCode.Exclude
+    public ItemDto() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getBlob() {
+        return blob;
+    }
+
+    public void setBlob(String blob) {
+        this.blob = blob;
+    }
+
+    private long id;
+    private String itemName ;
+    private String itemType;
+    private double price;
+    private double quantity;
     private String blob;
 
 }

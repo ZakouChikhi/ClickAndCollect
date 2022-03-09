@@ -22,9 +22,6 @@ public class ItemServiceImpl implements ItemService {
     public ItemDto create(ItemDto itemDto) {
         var item = this.itemMapper.map(itemDto);
         var savedItem=  this.itemRepository.save(item);
-        System.out.println("zebbiiii");
-
         return this.itemMapper.map(savedItem);
-
     }
 }

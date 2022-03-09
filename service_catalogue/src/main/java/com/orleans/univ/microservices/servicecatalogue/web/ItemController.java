@@ -6,7 +6,6 @@ import com.orleans.univ.microservices.servicecatalogue.infrastructure.service.It
 import com.orleans.univ.microservices.servicecatalogue.web.dto.ItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,9 +28,8 @@ public class ItemController {
 
     }
 
-    @PostMapping(value = "",consumes="application/json")
-    public ResponseEntity<Void> createItem(@RequestBody ItemDto itemDto){
-
+    @PostMapping(value = "")
+    public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto){
          var savedItemDto = this.itemService.create(itemDto);
          return ResponseEntity.status(HttpStatus.CREATED).build();
 
