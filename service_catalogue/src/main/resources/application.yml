@@ -1,0 +1,19 @@
+server:
+  port: 0
+spring:
+  application:
+    name: @project.artifactId@
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/catalogue
+    username: root
+    password: root
+    jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: true
+  cloud:
+    consul:
+      host: 127.0.0.1
+      discovery:
+        prefer-ip-address: true

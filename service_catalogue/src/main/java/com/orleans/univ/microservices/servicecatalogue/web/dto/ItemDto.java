@@ -8,6 +8,13 @@ package com.orleans.univ.microservices.servicecatalogue.web.dto;
 
 public class ItemDto {
 
+    private long id;
+    private String itemName ;
+    private String itemType;
+    private double price;
+    private double quantity;
+    private String blob;
+
 
     public ItemDto() {
     }
@@ -59,12 +66,5 @@ public class ItemDto {
     public void setBlob(String blob) {
         this.blob = blob;
     }
-
-    private long id;
-    private String itemName ;
-    private String itemType;
-    private double price;
-    private double quantity;
-    private String blob;
 
 }
