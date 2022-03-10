@@ -18,9 +18,8 @@ public class Item {
     private String itemType;
     private double price;
     private double quantity;
-    @Lob
-    @Column(name = "photo", columnDefinition="BLOB")
-    private byte[] blob;
+    @Column(name = "photo")
+    private String blob;
 
 
     public long getId() {
@@ -63,17 +62,11 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public byte[] getBlob() {
+    public String getBlob() {
         return blob;
     }
 
-    public void setBlob(byte[] blob) {
+    public void setBlob(String blob) {
         this.blob = blob;
     }
-
-
-
-
-
-
 }
