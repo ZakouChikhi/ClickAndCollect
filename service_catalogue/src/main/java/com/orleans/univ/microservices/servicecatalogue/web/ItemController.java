@@ -10,6 +10,7 @@ import com.orleans.univ.microservices.servicecatalogue.web.dto.ItemListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,13 +21,13 @@ public class ItemController {
     private final ItemService itemService;
 
 
-
     @Autowired
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "")
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto){
          var savedItemDto = this.itemService.create(itemDto);
@@ -35,7 +36,7 @@ public class ItemController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<ItemDto> createItem(@PathVariable long id){
+    public ResponseEntity<ItemDto> getItemById(@PathVariable long id){
         try {
             var itemDto  = this.itemService.getItem(id);
             return ResponseEntity.status(HttpStatus.OK).body(itemDto);
@@ -45,14 +46,13 @@ public class ItemController {
 
     }
 
-
-
-    @GetMapping(value = "")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ItemListDto> getAllItem(){
             var itemListDto  = this.itemService.getAllItem();
             return ResponseEntity.status(HttpStatus.OK).body(itemListDto);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/filterItems")
     public ResponseEntity<ItemListDto> getFilterItem(@ModelAttribute ItemFilterRequest itemFilterRequest){
         var itemListDto  = this.itemService.filter(itemFilterRequest);
@@ -60,6 +60,7 @@ public class ItemController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "{id}")
     public ResponseEntity<Void> updateItem(@PathVariable( value = "id" ) long id, @RequestBody ItemDto itemDto){
         try {
@@ -71,6 +72,7 @@ public class ItemController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{id}/")
     public ResponseEntity<Void> deleteItem(@PathVariable( value = "id" ) long id){
         try {
