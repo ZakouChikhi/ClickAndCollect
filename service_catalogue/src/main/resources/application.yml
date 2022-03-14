@@ -5,7 +5,7 @@ spring:
     name: @project.artifactId@
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/catalogue
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/catalogue
     username: root
     password: root
     jpa:

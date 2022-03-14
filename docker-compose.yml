@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - ${MYSQLDB_LOCAL_PORT}:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
+
+  consul:
+    image: consul:1.6.3
+    command: agent -server -ui -node=server1 -bootstrap-expect=1 -client=0.0.0.0
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    networks:
+      - consul-net
+  app:
+    depends_on:
+      - mysqldb
+    build: ./service_catalogue
+    restart: on-failure
+    env_file: ./.env
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+
+volumes:
+  db:
+networks:
+  consul-net:
+    driver: bridge
