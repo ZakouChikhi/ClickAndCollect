@@ -9,7 +9,6 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 
 @SpringBootApplication
-@EnableWebFlux
 public class ServicecatalogueApplication {
 
     public static void main(String[] args) {

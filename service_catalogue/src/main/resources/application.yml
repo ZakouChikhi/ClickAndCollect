@@ -12,16 +12,12 @@ spring:
       hibernate.ddl-auto: update
       generate-ddl: true
       show-sql: true
+
   cloud:
     consul:
       host: 127.0.0.1
       port: 8500
       discovery:
         prefer-ip-address: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8000/auth/realms/clickCollect
   main:
     allow-bean-definition-overriding: true

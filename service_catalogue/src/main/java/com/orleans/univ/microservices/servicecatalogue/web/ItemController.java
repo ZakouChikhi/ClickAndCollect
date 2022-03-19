@@ -27,14 +27,12 @@ public class ItemController {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "")
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto){
          var savedItemDto = this.itemService.create(itemDto);
          return ResponseEntity.status(HttpStatus.CREATED).body(savedItemDto);
 
     }
-
     @GetMapping(value = "{id}")
     public ResponseEntity<ItemDto> getItemById(@PathVariable long id){
         try {
@@ -46,13 +44,11 @@ public class ItemController {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ItemListDto> getAllItem(){
             var itemListDto  = this.itemService.getAllItem();
             return ResponseEntity.status(HttpStatus.OK).body(itemListDto);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/filterItems")
     public ResponseEntity<ItemListDto> getFilterItem(@ModelAttribute ItemFilterRequest itemFilterRequest){
         var itemListDto  = this.itemService.filter(itemFilterRequest);
@@ -60,7 +56,6 @@ public class ItemController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "{id}")
     public ResponseEntity<Void> updateItem(@PathVariable( value = "id" ) long id, @RequestBody ItemDto itemDto){
         try {
@@ -72,7 +67,6 @@ public class ItemController {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{id}/")
     public ResponseEntity<Void> deleteItem(@PathVariable( value = "id" ) long id){
         try {

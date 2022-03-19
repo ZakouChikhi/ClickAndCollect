@@ -24,14 +24,16 @@ services:
   app:
     depends_on:
       - mysqldb
+      - consul
     build: ./service_catalogue
     restart: on-failure
     env_file: ./.env
+    ports:
+      - ${SPRING_LOCAL_PORT}:$SPRING_DOCKER_PORT
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-
 
 volumes:
   db:
