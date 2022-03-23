@@ -19,5 +19,20 @@ spring:
       port: 8500
       discovery:
         prefer-ip-address: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
   main:
     allow-bean-definition-overriding: true
+
+queue:
+  sender:
+    name:
+      listItemQueue
+  listener:
+    name:
+      itemQueue

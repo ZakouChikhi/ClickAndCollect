@@ -1,12 +1,9 @@
 package com.orleans.univ.microservices.servicecatalogue.web.dto;
 
 
+import java.io.Serializable;
 
-
-
-
-
-public class ItemDto {
+public class ItemDto implements Serializable {
 
     private long id;
     private String itemName ;
