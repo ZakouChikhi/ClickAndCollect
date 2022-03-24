@@ -5,23 +5,26 @@ spring:
     name: @project.artifactId@
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/catalogue
+    url: jdbc:mysql://mysqldb:3306/catalogue?useSSL=false
     username: root
     password: root
     jpa:
       hibernate.ddl-auto: update
       generate-ddl: true
       show-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
   cloud:
     consul:
-      host: 127.0.0.1
-      port: 8500
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
       discovery:
         prefer-ip-address: true
 
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_HOST}
     port: 5672
     username: guest
     password: guest
@@ -36,3 +39,4 @@ queue:
   listener:
     name:
       itemQueue
+
