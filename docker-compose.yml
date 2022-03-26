@@ -42,21 +42,19 @@ services:
       - "5672:5672"
 
 
-  app:
+  service_catalogue:
+    container_name: servicecatalogue
+    build:
+      context: service_catalogue
+      dockerfile: Dockerfile
+    image: servicecatalogue:latest
+    environment:
+      - JAVA_TOOL_OPTIONS=  -DRABBITMQ_HOST=rabbitmq -DCONSUL_HOST=discovery -DCONSUL_PORT=8500 
+          -DDB_HOST=mysqldb -DDB_PORT=3306
     depends_on:
       - mysqldb
       - discovery
       - keycloak
       - rabbitmq
-    build: ./service_catalogue
-    restart: on-failure
-    env_file: ./.env
-    environment:
-      - JAVA_TOOL_OPTIONS= -DRABBITMQ_HOST=rabbitmq -DCONSUL_HOST=discovery -DCONSUL_PORT=8500
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-
 volumes:
   db:

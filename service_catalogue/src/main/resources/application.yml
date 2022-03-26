@@ -5,7 +5,7 @@ spring:
     name: @project.artifactId@
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysqldb:3306/catalogue?useSSL=false
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3307}/catalogue?useSSL=false
     username: root
     password: root
     jpa:
@@ -24,7 +24,7 @@ spring:
         prefer-ip-address: true
 
   rabbitmq:
-    host: ${RABBITMQ_HOST}
+    host: ${RABBITMQ_HOST:localhost}
     port: 5672
     username: guest
     password: guest
