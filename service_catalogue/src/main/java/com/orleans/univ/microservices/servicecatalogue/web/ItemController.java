@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/items")
+@RequestMapping(value = "/api/v1/items")
 public class ItemController {
 
     private final ItemService itemService;
@@ -33,7 +33,7 @@ public class ItemController {
          return ResponseEntity.status(HttpStatus.CREATED).body(savedItemDto);
 
     }
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ItemDto> getItemById(@PathVariable long id){
         try {
             var itemDto  = this.itemService.getItem(id);
@@ -56,7 +56,7 @@ public class ItemController {
     }
 
 
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Void> updateItem(@PathVariable( value = "id" ) long id, @RequestBody ItemDto itemDto){
         try {
             this.itemService.update(id,itemDto);
@@ -67,7 +67,7 @@ public class ItemController {
 
     }
 
-    @DeleteMapping(value = "/{id}/")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteItem(@PathVariable( value = "id" ) long id){
         try {
             this.itemService.delete(id);

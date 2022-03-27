@@ -12,12 +12,11 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    String jwkSetUri = "http://localhost:8000/auth/realms/clickCollect/protocol/openid-connect/certs";
+    // String jwkSetUri = "http://localhost:8000/auth/realms/clickCollect/protocol/openid-connect/certs";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -38,9 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return converter;
     }
 
+    /*
     @Bean
     JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
-    }
+        }
+     */
+
+
 }
 

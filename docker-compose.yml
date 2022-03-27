@@ -2,6 +2,7 @@ version: '3.5'
 
 services:
   mysqldb:
+    container_name: mysqldb
     image: mysql:5.7
     restart: unless-stopped
     env_file: ./.env
@@ -16,6 +17,7 @@ services:
 
   keycloak:
     image: jboss/keycloak:16.1.1
+    container_name: keycloak
     env_file: ./.env
     volumes:
       - ./imports:/opt/jboss/keycloak/imports
@@ -29,6 +31,7 @@ services:
       - 8000:8080
 
   discovery:
+    container_name: discovery
     image: consul:1.6.3
     ports:
       - 8500:8500
@@ -44,13 +47,12 @@ services:
 
   service_catalogue:
     container_name: servicecatalogue
-    build:
-      context: service_catalogue
-      dockerfile: Dockerfile
-    image: servicecatalogue:latest
+    image: service-catalogue
+    ports:
+      - 8080:8080
     environment:
       - JAVA_TOOL_OPTIONS=  -DRABBITMQ_HOST=rabbitmq -DCONSUL_HOST=discovery -DCONSUL_PORT=8500 
-          -DDB_HOST=mysqldb -DDB_PORT=3306
+          -DDB_HOST=mysqldb -DDB_PORT=3306 -DKEY_HOST=keycloak
     depends_on:
       - mysqldb
       - discovery

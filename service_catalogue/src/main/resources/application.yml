@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 0
 spring:
   application:
     name: @project.artifactId@
@@ -26,8 +26,12 @@ spring:
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: 5672
-    username: guest
-    password: guest
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${KEY_HOST:localhost}:8000/auth/realms/clickCollect/protocol/openid-connect/certs
 
   main:
     allow-bean-definition-overriding: true
