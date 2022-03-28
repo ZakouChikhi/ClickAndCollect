@@ -31,16 +31,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://${KEY_HOST:localhost}:8000/auth/realms/clickCollect/protocol/openid-connect/certs
+          jwk-set-uri: http://${KEY_HOST:localhost}:8080/auth/realms/clickCollect/protocol/openid-connect/certs
 
   main:
     allow-bean-definition-overriding: true
-
-queue:
-  sender:
-    name:
-      listItemQueue
-  listener:
-    name:
-      itemQueue
-

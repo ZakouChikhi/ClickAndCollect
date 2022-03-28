@@ -9,16 +9,15 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
-      - MYSQL_USER= $MYSQLDB_USER
+      - MYSQL_USER=$MYSQLDB_USER
     ports:
-      - ${MYSQLDB_LOCAL_PORT}:$MYSQLDB_DOCKER_PORT
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
     volumes:
       - db:/var/lib/mysql
 
   keycloak:
     image: jboss/keycloak:16.1.1
     container_name: keycloak
-    env_file: ./.env
     volumes:
       - ./imports:/opt/jboss/keycloak/imports
     command:
@@ -28,7 +27,7 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
     ports:
-      - 8000:8080
+      - 8080:8080
 
   discovery:
     container_name: discovery
@@ -48,11 +47,14 @@ services:
   service_catalogue:
     container_name: servicecatalogue
     image: service-catalogue
-    ports:
-      - 8080:8080
     environment:
-      - JAVA_TOOL_OPTIONS=  -DRABBITMQ_HOST=rabbitmq -DCONSUL_HOST=discovery -DCONSUL_PORT=8500 
-          -DDB_HOST=mysqldb -DDB_PORT=3306 -DKEY_HOST=keycloak
+      - JAVA_TOOL_OPTIONS=  
+        -DRABBITMQ_HOST=rabbitmq 
+        -DCONSUL_HOST=discovery 
+        -DCONSUL_PORT=8500
+        -DDB_HOST=mysqldb 
+        -DDB_PORT=3306 
+        -DKEY_HOST=keycloak
     depends_on:
       - mysqldb
       - discovery
