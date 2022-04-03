@@ -8,7 +8,7 @@ client.global.set("token", response.body.access_token);
 %}
 
 ###
-GET http://localhost:8081/api/v1/items/
+GET http://localhost:43311/api/v1/items/
 Authorization: Bearer {{token}}
 
 ###
@@ -20,7 +20,7 @@ http://localhost:8081/api/v1/items/filterItems/?itemIds=1
 Authorization: Bearer {{token}}
 
 ###
-POST http://localhost:8081/api/v1/items
+POST http://localhost:43311/api/v1/items
 Authorization: Bearer {{token}}
 content-type: application/json
 
